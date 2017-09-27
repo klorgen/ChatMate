@@ -8,7 +8,7 @@ function getMessages() {
             })
             .then(messages => postMessage(messages))
             .catch(e => console.log(e));
-    setTimeout("getMessages()",250);
+    setTimeout("getMessages()",1000);
 }
 
 self.addEventListener("message", event=> {
