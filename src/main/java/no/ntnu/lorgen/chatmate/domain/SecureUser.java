@@ -22,7 +22,8 @@ import lombok.NoArgsConstructor;
  */
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor
-@XmlRootElement @XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class SecureUser implements Serializable{
     @Id
     String userid;
