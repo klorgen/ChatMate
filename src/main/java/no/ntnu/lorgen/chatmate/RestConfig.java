@@ -23,6 +23,7 @@ public class RestConfig extends Application {
 
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(no.ntnu.lorgen.chatmate.AuthService.class);
+        resources.add(no.ntnu.lorgen.chatmate.ChatService.class);
         resources.add(no.ntnu.lorgen.chatmate.MessageService.class);
     }
 }
