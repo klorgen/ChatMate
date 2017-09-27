@@ -1,24 +1,26 @@
 class ChatRoom {
     constructor() {
-        this.photo = document.querySelector("#photo");
-        this.forum = document.querySelector("#forum");
+        this.chat = document.querySelector("#chatroom");
         this.message = document.querySelector("#message");
 
-        this.name = new URL(document.URL).searchParams.get("photo");
-        this.loadImage(this.name);
+
+        this.name = new URL(document.URL).searchParams.get("room");
+        this.user = new URL(document.URL).searchParams.get("user");
+        document.getElementById("headline").textContent = "Welcome to " + this.name + " " + this.user;
+
 
         this.message.onchange = event => {
             fetch('api/messages/add?name=' + this.name,
                     {
                         method: 'POST',
-                        body: JSON.stringify(new Message('Kay', event.target.value)),
+                        body: JSON.stringify(new Message(this.user, event.target.value)),
                         headers: {'Content-Type': 'application/json; charset=UTF-8'}
                     })
                     .then(response => {
                         if (response.ok) {
                             return response.json();
                         }
-                        throw new Error("Failed to send message " + event.target.value);
+                        throw new Error("Failed to send message '" + event.target.value + "' from user: " + this.user);
                     })
                     .then(message => {
                         this.message.value = "";
@@ -30,33 +32,25 @@ class ChatRoom {
         this.worker.postMessage({"name": this.name});
 
         this.worker.onmessage = event => {
-            this.forum.innerHTML = '';
+            this.chat.innerHTML = '';
             let ul = document.createElement('ul');
             event.data.map(message => {
                 let li = document.createElement('li');
                 li.innerHTML = `${message.user} - ${message.text}`;
                 ul.appendChild(li);
             });
-            this.forum.appendChild(ul);
-            // this.forum.scrollTop = this.forum.scrollHeight;
-        }
-
-    }
-
-    loadImage(name) {
-        let img = document.createElement('img');
-        img.src = 'api/store/' + name + '?width=300';
-        this.photo.appendChild(img);
-
+            this.chat.appendChild(ul);
+        };
     }
 }
 
+
 class Message {
     constructor(user, text) {
-        this.user = user;
         this.text = text;
+        this.user = user;
         this.version = new Date();
     }
 }
 
-let room = new ChatRoom();
+let chat = new ChatRoom();
