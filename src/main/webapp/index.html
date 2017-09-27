@@ -6,10 +6,12 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <h3>Welcome to ChatMate2000</h3>
-        <div id="chatroom"></div>
-        <a href="chatroom.html?name=chatroom1"> <ul>#chatroom 1</ul></a>
-        <a href="chatroom.html?name=chatroom2"> <ul>#chatroom 2</ul></a>
+        <div class="container">
+            <h3>Welcome to ChatMate2000</h3>
+            <a> User: <input id="user" value="user" type="text" onkeypress="updateUser(this.value)"/></a>
+            <div id="chat"></div>
+            <button id="addNewRoom" onclick="addNewChatroom()"> New chatroom </button>
+        </div>
         <script src="script.js"></script>
     </body>
 </html>
