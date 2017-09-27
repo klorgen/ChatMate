@@ -33,7 +33,7 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
  *
  * @author klorg
  */
-@Path("messages")
+@Path("message")
 public class MessageService {
     
    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
@@ -114,9 +114,9 @@ public class MessageService {
 
 
     @GET
-    
+    @Path("status")
     public Response getMessages() {
         
-        return Response.ok("All works fine").build();
+        return Response.ok("All works fine!!!").build();
     }
 }
